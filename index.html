@@ -1,56 +1,39 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Tra Cứu Kết Quả - Tài Việt</title>
+  <title>Kết Quả Học Tập - Tài Việt</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
   <style>
-    body { font-family: 'Montserrat', sans-serif; margin: 0; padding: 0; background: #fff; display: flex; justify-content: center; }
-    .main-app { width: 100%; max-width: 450px; text-align: center; padding-top: 10px; }
-    .logo { width: 80px; height: 80px; object-fit: contain; margin-bottom: 5px; }
-    h2 { font-size: 20px; color: #333; margin: 5px 0; font-weight: 800; text-transform: uppercase; }
-    .sub-title { font-size: 14px; color: #d63031; font-weight: 700; display: block; margin-bottom: 20px; }
-    .search-box { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-    input[type="text"] { 
-      width: 80%; max-width: 260px; border-radius: 50px; padding: 12px 20px; 
-      border: 2px solid #f1f2f6; font-size: 16px; text-align: center; outline: none; background: #f8f9fa;
-    }
-    button { 
-      width: fit-content; min-width: 140px; border-radius: 50px; padding: 12px 30px; border: none; 
-      background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
-      color: white; font-weight: 700; font-size: 16px; cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 176, 155, 0.2);
-    }
-    #result { padding: 20px 15px; text-align: left; display: none; }
+    body { font-family: 'Montserrat', sans-serif; margin: 0; background: #fff; display: flex; justify-content: center; }
+    .main-app { width: 100%; max-width: 450px; text-align: center; padding: 20px 10px; }
+    .logo { width: 100px; margin-bottom: 10px; }
+    h2 { font-size: 22px; color: #333; margin: 5px 0; text-transform: uppercase; }
+    .sub-title { font-size: 14px; color: #d63031; font-weight: 700; margin-bottom: 25px; display: block; }
+    .search-box { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+    input { width: 80%; border-radius: 50px; padding: 12px 20px; border: 2px solid #f1f2f6; font-size: 16px; text-align: center; outline: none; background: #f8f9fa; }
+    button { width: 160px; border-radius: 50px; padding: 12px; border: none; background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%); color: white; font-weight: 700; cursor: pointer; box-shadow: 0 4px 10px rgba(0, 176, 155, 0.2); }
+    button:disabled { background: #ccc; cursor: not-allowed; }
+    #result { margin-top: 25px; text-align: left; display: none; }
     .student-info { background: #f0fdf4; border-radius: 12px; padding: 15px; margin-bottom: 15px; border-left: 5px solid #00b09b; }
-    .student-info b { font-size: 18px; color: #2d3436; }
-    .student-info i { color: #00b09b; margin-right: 8px; width: 20px; text-align: center; }
-    .score-item { display: flex; justify-content: space-between; padding: 14px 10px; border-bottom: 1px solid #f1f2f6; align-items: center; }
-    .score-item i { color: #636e72; margin-right: 8px; font-size: 14px; }
-    .badge { font-weight: 800; font-size: 16px; padding: 5px 12px; border-radius: 8px; min-width: 40px; text-align: center; }
+    .score-item { display: flex; justify-content: space-between; padding: 12px 10px; border-bottom: 1px solid #f1f2f6; align-items: center; }
+    .badge { font-weight: 800; padding: 5px 12px; border-radius: 8px; min-width: 45px; text-align: center; }
     .good { background: #dcfce7; color: #15803d; }
-    .avg  { background: #fef9c3; color: #a16207; }
-    .low  { background: #fee2e2; color: #b91c1c; }
-    .loading { color: #666; font-style: italic; }
+    .avg { background: #fef9c3; color: #a16207; }
+    .low { background: #fee2e2; color: #b91c1c; }
   </style>
 </head>
 <body>
   <div class="main-app">
-    <div class="header">
-      <img src="https://i.postimg.cc/DwFwF1z1/IMG-1767000026090-1767005512540.jpg" class="logo">
-      <h2>KẾT QUẢ HỌC TẬP</h2>
-      <span class="sub-title">NGOẠI NGỮ TÀI VIỆT</span>
-    </div>
-
+    <img src="https://i.postimg.cc/DwFwF1z1/IMG-1767000026090-1767005512540.jpg" class="logo">
+    <h2>KẾT QUẢ HỌC TẬP</h2>
+    <span class="sub-title">NGOẠI NGỮ TÀI VIỆT</span>
     <div class="search-box">
-      <input type="text" id="maHS" placeholder="Mã học viên..." onkeypress="if(event.key==='Enter') search()">
+      <input type="text" id="maHS" placeholder="Nhập mã học viên..." onkeypress="if(event.key==='Enter') search()">
       <button onclick="search()" id="btn">TRA CỨU</button>
     </div>
-
     <div id="result"></div>
   </div>
 
@@ -59,17 +42,16 @@
       const ma = document.getElementById("maHS").value.trim();
       const resDiv = document.getElementById("result");
       const btn = document.getElementById("btn");
-
       if (!ma) return;
 
-      // THAY LINK WEB APP CỦA BẠN VÀO ĐÂY
-      const scriptUrl = "https://script.google.com/macros/s/AKfycbwexmMLys25p4vo6NyeKFasqB0PX3ZgUt3nWezWf4gsEmrDTlLIsgvH8MT-4hzzwyLF/exec";
+      // DÁN LINK WEB APP CỦA BẠN VÀO DÒNG DƯỚI ĐÂY
+      const scriptUrl = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhQlhVuFyC38G3ZoNg--_vd006kuKCnGuPxTZexSNKzUAlD7lw6feSZfYcIeen9Iqndyt1nxZ-e51kPrUD7sIMK3gitAQn2YYb-c-bt5v2tzrMmUxS8DvLq5oOgUHgBG8Vlxtw52Ygkoo1EQAnQnTUDqqUqCOSvv5EJdp9va2kJJW14IlKr6VWx4rCgaYCNEhl_SZ3erNI_LBvuJ1l58TVnHaaba3RXSrP3KJsgYegLgAB2QDfpe5XTm087be1zS6quXGN0KMGD51IGcdpNH9C8Ry0SbA&lib=MckF2k2kUBY_FAy6BEt_zC1S-o4wWKLZ2";
 
       resDiv.style.display = "block";
-      resDiv.innerHTML = "<p class='loading' style='text-align:center'>Đang tìm dữ liệu...</p>";
+      resDiv.innerHTML = "<p style='text-align:center'>Đang tải dữ liệu...</p>";
       btn.disabled = true;
 
-      fetch(`${scriptUrl}?ma=${ma}`)
+      fetch(scriptUrl + "?ma=" + encodeURIComponent(ma))
         .then(response => response.json())
         .then(res => {
           btn.disabled = false;
@@ -80,24 +62,27 @@
                 <i class="fas fa-graduation-cap"></i> <small>Lớp: ${res.lop}</small>
               </div>`;
             
-            res.diem.forEach(item => {
-              let val = parseFloat(item.diem);
-              let cls = isNaN(val) ? 'avg' : (val < 5 ? 'low' : (val < 8 ? 'avg' : 'good'));
-              html += `
-                <div class="score-item">
-                  <span><i class="fas fa-book"></i> ${item.mon}</span>
-                  <span class="badge ${cls}">${item.diem}</span>
-                </div>`;
-            });
+            if(res.diem.length === 0) {
+              html += "<p style='text-align:center; color: gray;'>Chưa có dữ liệu điểm.</p>";
+            } else {
+              res.diem.forEach(item => {
+                let val = parseFloat(item.diem);
+                let cls = isNaN(val) ? 'avg' : (val < 5 ? 'low' : (val < 8 ? 'avg' : 'good'));
+                html += `
+                  <div class="score-item">
+                    <span><i class="fas fa-book"></i> ${item.mon}</span>
+                    <span class="badge ${cls}">${item.diem}</span>
+                  </div>`;
+              });
+            }
             resDiv.innerHTML = html;
           } else {
-            resDiv.innerHTML = "<p style='color:red; text-align:center; font-weight:bold;'>Mã học sinh không đúng!</p>";
+            resDiv.innerHTML = "<p style='color:red; text-align:center; font-weight:bold;'>Mã học sinh không tồn tại!</p>";
           }
         })
-        .catch(error => {
+        .catch(err => {
           btn.disabled = false;
-          resDiv.innerHTML = "<p style='color:red; text-align:center;'>Lỗi kết nối dữ liệu!</p>";
-          console.error(error);
+          resDiv.innerHTML = "<p style='color:red; text-align:center;'>Lỗi kết nối! Vui lòng kiểm tra lại link Web App.</p>";
         });
     }
   </script>
