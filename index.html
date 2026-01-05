@@ -46,21 +46,16 @@ body {
     }
     .search-box { display: flex; flex-direction: column; align-items: center; gap: 15px; }
    input[type="text"] {
-    width: 100%;
-    padding: 10px 15px; /* Độ cao vừa phải */
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    
-    /* CHỈNH TẠI ĐÂY: Số càng nhỏ thì góc càng vuông, số lớn thì càng tròn */
-    border-radius: 8px; 
-    
-    font-size: 16px;
-    box-sizing: border-box;
-    text-align: center;
-    outline: none;
-    background-color: #f9f9f9; /* Màu nền nhẹ cho ô nhập */
-}
-
+        width: 60%;
+        padding: 10px 15px; /* Giảm độ cao một chút cho thanh thoát */
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 25px; /* Bo tròn mềm mại */
+        font-size: 16px;
+        box-sizing: border-box; /* Giúp ô nhập không bị tràn lề */
+        text-align: center;
+        outline: none;
+    }
 button {
     width: 60%; 
     padding: 10px;
